@@ -3,16 +3,19 @@ require  'config/cnx_db.php';
 require_once 'classes/Patient.php';
 require_once 'classes/Personne.php';
 require_once 'crud_functions/patient_crud.php';
+require_once 'crud_functions/department_crud.php';
 class Menu
 {
 
     private PDO $db;
     private PatientCRUD $patientCRUD;
+    private DepartmentCRUD $departementCRUD;
 
     public function __construct(PDO $db)
     {
         $this->db = $db;
         $this->patientCRUD = new PatientCRUD($db);
+        $this->departementCRUD = new DepartmentCRUD($db);
     }
 
     public function afficherMenuPrincipal()
@@ -80,12 +83,36 @@ class Menu
         
         echo "=== Gestion des Departement ===\n";
         echo "1. Lister les Departement\n";
-        echo "2. Rechercher un Departement\n";
-        echo "3. Ajouter un Departement\n";
-        echo "4. Modifier un Departement\n";
-        echo "5. Supprimer un Departement\n";
-        echo "6. Retour\n";
+        echo "2. Ajouter un Departement\n";
+        echo "3. Modifier un Departement\n";
+        echo "4. Supprimer un Departement\n";
+        echo "5. Retour\n";
     }
+
+        public function gererDepartements()
+    {
+        while (true) {
+            $this->afficherMenuDepartement();
+            $choix = readline("Votre choix : ");
+
+            if ($choix == "1") {
+                $this->departementCRUD->listerDepartements();
+            }
+            elseif ($choix == "2") {
+                $this->departementCRUD->ajouterDepartement();
+            }
+            elseif ($choix == "3") {
+                $this->departementCRUD->modifierDepartement();
+            }
+            elseif ($choix == "4") {
+                $this->departementCRUD->supprimerDepartement();
+            }
+            elseif ($choix == "5") {
+                break; // retourne au menu principal
+            }
+        }
+    }
+
 
     public function afficher()
     {
@@ -101,7 +128,7 @@ class Menu
                 
             }
             elseif ($choix == "3") {
-                $this->afficherMenuDepartement();
+                $this->gererDepartements();
                 
             }
             elseif ($choix == "5") {
