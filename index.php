@@ -28,8 +28,7 @@ class Menu
         echo "1. Gérer les patients\n";
         echo "2. Gérer les médecins\n";
         echo "3. Gérer les départements\n";
-        echo "4. Statistiques\n";
-        echo "5. Quitter\n";
+        echo "4. Quitter\n";
     }
 
     public function afficherMenuPatients()
@@ -157,7 +156,7 @@ class Menu
                 $this->gererDepartements();
                 
             }
-            elseif ($choix == "5") {
+            elseif ($choix == "4") {
                 echo "Au revoir\n";
                 break;
             }
