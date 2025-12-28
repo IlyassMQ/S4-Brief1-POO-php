@@ -4,18 +4,21 @@ require_once 'classes/Patient.php';
 require_once 'classes/Personne.php';
 require_once 'crud_functions/patient_crud.php';
 require_once 'crud_functions/department_crud.php';
+require_once 'crud_functions/doctor_crud.php';
 class Menu
 {
 
     private PDO $db;
     private PatientCRUD $patientCRUD;
     private DepartmentCRUD $departementCRUD;
+    private DoctorCRUD $doctorCRUD;
 
     public function __construct(PDO $db)
     {
         $this->db = $db;
         $this->patientCRUD = new PatientCRUD($db);
         $this->departementCRUD = new DepartmentCRUD($db);
+        $this->doctorCRUD = new DoctorCRUD($db);
     }
 
     public function afficherMenuPrincipal()
@@ -71,11 +74,34 @@ class Menu
        
         echo "=== Gestion des Dotore ===\n";
         echo "1. Lister les Dotore\n";
-        echo "2. Rechercher un Dotore\n";
-        echo "3. Ajouter un Dotore\n";
-        echo "4. Modifier un Dotore\n";
-        echo "5. Supprimer un Dotore\n";
-        echo "6. Retour\n";
+        echo "2. Ajouter un Dotore\n";
+        echo "3. Modifier un Dotore\n";
+        echo "4. Supprimer un Dotore\n";
+        echo "5. Retour\n";
+    }
+
+    public function gererDoctors()
+    {
+        while (true) {
+            $this->afficherMenuDoctors();
+            $choix = readline("Votre choix : ");
+
+            if ($choix == "1") {
+                $this->doctorCRUD->listerDoctors();
+            }
+            elseif ($choix == "2") {
+                $this->doctorCRUD->ajouterDoctor();
+            }
+            elseif ($choix == "3") {
+                $this->doctorCRUD->modifierDoctor();
+            }
+            elseif ($choix == "4") {
+                $this->doctorCRUD->supprimerDoctor();
+            }
+            elseif ($choix == "5") {
+                break; // retour menu principal
+            }
+        }
     }
 
     public function afficherMenuDepartement()
@@ -124,7 +150,7 @@ class Menu
                 $this->gererPatients();
             }
             elseif ($choix == "2") {
-                $this->afficherMenuDoctors();
+                $this->gererDoctors();
                 
             }
             elseif ($choix == "3") {
