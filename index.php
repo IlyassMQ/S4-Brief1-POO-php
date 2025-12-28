@@ -72,11 +72,11 @@ class Menu
     public function afficherMenuDoctors()
     {
        
-        echo "=== Gestion des Dotore ===\n";
-        echo "1. Lister les Dotore\n";
-        echo "2. Ajouter un Dotore\n";
-        echo "3. Modifier un Dotore\n";
-        echo "4. Supprimer un Dotore\n";
+        echo "=== Gestion des Doctore ===\n";
+        echo "1. Lister les Doctore\n";
+        echo "2. Ajouter un Doctore\n";
+        echo "3. Modifier un Doctore\n";
+        echo "4. Supprimer un Doctore\n";
         echo "5. Retour\n";
     }
 
